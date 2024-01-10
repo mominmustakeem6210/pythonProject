@@ -1,0 +1,88 @@
+Multithreading in Python:
+=========================
+
+Process level Multitasking - OS
+
+Thread level Multitasking -- Dev
+
+
+
+1.creating thread without using any class (function based thread) - 99
+2.Creating thread by extending Thread Class
+3.Creating Thread without extending Thread class (class BasedThread)
+
+
+
+import threading
+import  time
+def srq():
+    sqr_list = []
+    for i in range(1,11):
+        time.sleep(1)
+        t = i**2
+        sqr_list.append(t)
+    print(sqr_list)
+def qube():
+    qube_list = []
+    for i in range(1,11):
+        time.sleep(1)
+        t = i**3
+        qube_list.append(t)
+    print(qube_list)
+start_time = time.time()
+t1 = threading.Thread(target=srq) # creating thread
+t2 = threading.Thread(target=qube) #t2
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+end_time = time.time()
+print("total time required:",end_time-start_time)
+
+print("in main thread")
+
+
+from threading import Thread
+
+class Test(Thread):
+    def run(self):
+        sqr1 = []
+        for i in range(1, 50):
+            t = i ** 2
+            sqr1.append(t)
+        print(sqr1)
+class Test1(Thread):
+    def run(self):
+        sqr = []
+        for i in range(1,50):
+            t = i**3
+            sqr.append(t)
+        print(sqr)
+t1 = Test()
+t2 = Test1()
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+print("in main thread")
+
+
+
+import threading
+import  time
+def srq(a):
+    sqr_list = []
+    for i in a:
+        time.sleep(1)
+        t = i**2
+        sqr_list.append(t)
+    print(sqr_list)
+p = [10,20,40]
+start_time = time.time()
+t1 = threading.Thread(target=srq,args=(p,)) # creating thread
+t1.start()
+t1.join()
+end_time = time.time()
+print("total time required:",end_time-start_time)
+
+print("in main thread")
